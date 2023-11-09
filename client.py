@@ -1,17 +1,29 @@
 import socket
 
-# Connect to the already existing server
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(("localhost", 9999))
+def run_client():
+    # Connect to the already existing server
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-done = False
+    try:
+        client.connect(("localhost", 9999))
 
-while not done:
-    client.send(input("Server: ").encode('utf-8'))
-    message = client.recv(1024).decode('utf-8')
-    if message == 'exit':
-        done = True
-    else:
-        print(message)
-    
-client.close()
+        done = False
+
+        while not done:
+            message = input("Client: ")
+            client.send(message.encode('utf-8'))
+
+            response = client.recv(1024).decode('utf-8')
+            if response == 'exit':
+                done = True
+            else:
+                print(response)
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+    finally:
+        client.close()
+
+if __name__ == "__main__":
+    run_client()
