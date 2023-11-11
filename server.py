@@ -1,10 +1,7 @@
 import socket
 
 def run_server():
-    # Create a socket that communicates over IPv4 network using the TCP protocol
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Assign an IP address and a port number to this socket instance
     server_address = ('localhost', 9999)
     
     try:
@@ -13,7 +10,6 @@ def run_server():
         
         print(f"Server listening on {server_address}")
 
-        # Accept the incoming connections
         client, addr = server.accept()
 
         done = False
