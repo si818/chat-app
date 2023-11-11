@@ -28,7 +28,6 @@ def run_server():
         print(f"Error: {e}")
 
     finally:
-        # Close the client socket and the server socket
         client.close()
         server.close()
 
